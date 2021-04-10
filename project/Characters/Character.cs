@@ -1,5 +1,6 @@
 ﻿using System;
 using DungeonCrawler.AutoLoad;
+using DungeonCrawler.Combat;
 using DungeonCrawler.Controls;
 using DungeonCrawler.Extensions;
 using Godot;
@@ -20,20 +21,16 @@ namespace DungeonCrawler.Characters
         // Other node dependencies
         protected Sprite CharacterSprite;
         protected AnimationPlayer AnimationPlayer;
-        // protected AnimationTree AnimationTree;
 
-        protected IController Controller;
+        protected IController Controller = new NoController();
     
         public override void _Ready()
         {
             CharacterSprite = this.GetChildNode<Sprite>("CharacterSprite");
             AnimationPlayer = this.GetChildNode<AnimationPlayer>();
-        
-            // AnimationTree = this.GetChildNode<AnimationTree>();
-            // AnimationTree.Active = true;
-        
-            // Controller = new FirstController();
         }
+        
+        public IController GetController() => Controller;
 
         public void AttachController(IController controller)
         {
@@ -44,6 +41,15 @@ namespace DungeonCrawler.Characters
             }
 
             Controller = controller;
+        }
+
+        public bool DetachController()
+        {
+            if (Controller.GetType() == typeof(NoController))
+                return false;
+
+            Controller = new NoController();
+            return true;
         }
 
         public override void _PhysicsProcess(float delta)
