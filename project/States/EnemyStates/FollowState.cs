@@ -3,36 +3,36 @@ using DungeonCrawler.Characters.NonPlayable;
 
 namespace DungeonCrawler.States.EnemyStates
 {
-    public class FollowState : EnemyState
+    public class FollowState : State<EnemyCharacter>
     {
-        public FollowState(Enemy enemy) : base(enemy)
+        public FollowState(EnemyCharacter enemyCharacter) : base(enemyCharacter)
         {
         }
         
         public override void Init()
         {
-            Enemy.AnimationPlayer.Play("Run");
+            Node.AnimationPlayer.Play("Run");
         }
 
         public override void Run(float delta)
         {
-            if (Enemy.Target is null)
+            if (Node.Target is null)
             {
-                Enemy.PopState();
+                Node.PopState();
                 return;
             }
 
-            var targetDirection = Enemy.Target.Position - Enemy.Position;
+            var targetDirection = Node.Target.Position - Node.Position;
             targetDirection = targetDirection.Normalized();
 
-            Enemy.CharacterSprite.FlipH = targetDirection.x < 0;
+            Node.CharacterSprite.FlipH = targetDirection.x < 0;
 
-            Enemy.MoveAndSlide(targetDirection * Enemy.MaxSpeed);
+            Node.MoveAndSlide(targetDirection * Node.MaxSpeed);
         }
 
         public override void Resume()
         {
-            Enemy.AnimationPlayer.Play("Run");
+            Node.AnimationPlayer.Play("Run");
         }
     }
 }

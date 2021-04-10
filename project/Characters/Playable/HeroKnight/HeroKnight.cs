@@ -2,7 +2,7 @@ using DungeonCrawler.Controls;
 
 namespace DungeonCrawler.Characters.Playable.HeroKnight
 {
-    public class HeroKnight : Character
+    public class HeroKnight : PlayerCharacter
     {
         public override void _Ready()
         {

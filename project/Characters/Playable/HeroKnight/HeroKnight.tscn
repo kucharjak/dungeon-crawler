@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Characters/Playable/HeroKnight/HeroKnight.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Playable/HeroKnight/HeroKnight.cs" type="Script" id=2]
+[ext_resource path="res://States/StateComponent.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -61,6 +62,8 @@ script = ExtResource( 2 )
 MaxSpeed = 110
 Acceleration = 550
 Friction = 900
+
+[node name="StateComponent" parent="." instance=ExtResource( 3 )]
 
 [node name="CharacterSprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

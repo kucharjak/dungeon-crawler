@@ -2,28 +2,28 @@
 
 namespace DungeonCrawler.States.EnemyStates
 {
-    public class IdleState : EnemyState
+    public class IdleState : State<EnemyCharacter>
     {
-        public IdleState(Enemy enemy) : base(enemy)
+        public IdleState(EnemyCharacter enemyCharacter) : base(enemyCharacter)
         {
         }
         
         public override void Init()
         {
-            Enemy.AnimationPlayer.Play("Idle");
+            Node.AnimationPlayer.Play("Idle");
         }
     
         public override void Run(float delta)
         {
-            if (Enemy.Target is null)
+            if (Node.Target is null)
                 return;
             
-            Enemy.PushState(new FollowState(Enemy));
+            Node.PushState(new FollowState(Node));
         }
 
         public override void Resume()
         {
-            Enemy.AnimationPlayer.Play("Idle");
+            Node.AnimationPlayer.Play("Idle");
         }
     }
 }

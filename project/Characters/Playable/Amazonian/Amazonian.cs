@@ -2,7 +2,7 @@ using DungeonCrawler.Controls;
 
 namespace DungeonCrawler.Characters.Playable.Amazonian
 {
-    public class Amazonian : Character
+    public class Amazonian : PlayerCharacter
     {
         public override void _Ready()
         {

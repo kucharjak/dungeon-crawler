@@ -1,17 +1,21 @@
 ﻿using DungeonCrawler.AutoLoad;
-using DungeonCrawler.Characters.NonPlayable;
+using Godot;
 
-namespace DungeonCrawler.States.EnemyStates
+namespace DungeonCrawler.States
 {
-    public abstract class EnemyState : IState
+    public abstract class State<TNode> : IState
+        where TNode : Node
     {
-        protected readonly Enemy Enemy;
+        /// <summary>
+        /// Node assigned for the given state. Mainly the node, that will be changed by state logic. 
+        /// </summary>
+        protected readonly TNode Node;
 
-        protected EnemyState(Enemy enemy)
+        protected State(TNode node)
         {
-            Enemy = enemy;
+            Node = node;
         }
-
+        
         public virtual void Init()
         {
             LoggingComponent.Logger.Debug($"{GetType().Name} - Called Init method");
@@ -24,7 +28,7 @@ namespace DungeonCrawler.States.EnemyStates
 
         public virtual void Resume()
         {
-            LoggingComponent.Logger.Debug($"{GetType().Name} - Called Init method");
+            LoggingComponent.Logger.Debug($"{GetType().Name} - Called Resume method");
         }
 
         public virtual void Pause()

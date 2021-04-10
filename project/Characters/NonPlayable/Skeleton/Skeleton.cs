@@ -1,6 +1,6 @@
 namespace DungeonCrawler.Characters.NonPlayable.Skeleton
 {
-    public class Skeleton : Enemy
+    public class Skeleton : EnemyCharacter
     {
         // [Export] public string DisplayName = "Bones";
 
