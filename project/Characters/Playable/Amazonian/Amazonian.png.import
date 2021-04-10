@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Amazonian.png-6a638b78c65990ff3514ae754f785a84.stex"
+path="res://.import/Amazonian.png-60c8bbe7694d33e1b27291ade107373c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/Amazonian/Amazonian.png"
-dest_files=[ "res://.import/Amazonian.png-6a638b78c65990ff3514ae754f785a84.stex" ]
+source_file="res://Characters/Playable/Amazonian/Amazonian.png"
+dest_files=[ "res://.import/Amazonian.png-60c8bbe7694d33e1b27291ade107373c.stex" ]
 
 [params]
 

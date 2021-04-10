@@ -3,7 +3,7 @@ using DungeonCrawler.States;
 using DungeonCrawler.States.EnemyStates;
 using Godot;
 
-namespace DungeonCrawler.Enemies
+namespace DungeonCrawler.Characters.NonPlayable
 {
     public class Enemy : KinematicBody2D, IStateComponent<EnemyState>
     {
@@ -32,12 +32,6 @@ namespace DungeonCrawler.Enemies
 
             CharacterSprite = this.GetChildNode<Sprite>("CharacterSprite");
         }
-        
-        public override void _PhysicsProcess(float delta)
-        {
-            var actualState = State.PeekState();
-            actualState.Run(delta);
-        }
 
         public void OnTargetSpotted(Node2D target)
         {
@@ -51,7 +45,9 @@ namespace DungeonCrawler.Enemies
             
             Target = null;
         }
-        
+
+        public int Count => State.Count;
+
         public void PushState(EnemyState newState)
         {
             State.PushState(newState);

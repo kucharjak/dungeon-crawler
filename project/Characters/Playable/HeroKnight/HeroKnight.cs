@@ -1,7 +1,6 @@
 using DungeonCrawler.Controls;
-using Godot;
 
-namespace DungeonCrawler.Characters.HeroKnight
+namespace DungeonCrawler.Characters.Playable.HeroKnight
 {
     public class HeroKnight : Character
     {

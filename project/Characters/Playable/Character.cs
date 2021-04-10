@@ -1,11 +1,10 @@
 ﻿using System;
 using DungeonCrawler.AutoLoad;
-using DungeonCrawler.Combat;
 using DungeonCrawler.Controls;
 using DungeonCrawler.Extensions;
 using Godot;
 
-namespace DungeonCrawler.Characters
+namespace DungeonCrawler.Characters.Playable
 {
     public class Character : KinematicBody2D
     {

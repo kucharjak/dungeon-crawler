@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/HeroKnight.png-a63c7ca25b4273fa5af1397c2d4421a3.stex"
+path="res://.import/Skeleton.png-2c04bc0e92c83fc7838ee4eee6fdd4ef.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/HeroKnight/HeroKnight.png"
-dest_files=[ "res://.import/HeroKnight.png-a63c7ca25b4273fa5af1397c2d4421a3.stex" ]
+source_file="res://Characters/NonPlayable/Skeleton/Skeleton.png"
+dest_files=[ "res://.import/Skeleton.png-2c04bc0e92c83fc7838ee4eee6fdd4ef.stex" ]
 
 [params]
 

@@ -1,5 +1,4 @@
-﻿using DungeonCrawler.Enemies;
-using DungeonCrawler.Enemies.Skeleton;
+﻿using DungeonCrawler.Characters.NonPlayable;
 
 namespace DungeonCrawler.States.EnemyStates
 {

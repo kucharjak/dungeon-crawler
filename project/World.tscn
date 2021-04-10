@@ -3,9 +3,9 @@
 [ext_resource path="res://Dungeons/Dungeon-1.png" type="Texture" id=1]
 [ext_resource path="res://Dungeons/Box.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Dungeons/Dungeon - background - 1.png" type="Texture" id=3]
-[ext_resource path="res://Characters/HeroKnight/HeroKnight.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Enemies/Skeleton/Skeleton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Characters/Amazonian/Amazonian.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Characters/Playable/HeroKnight/HeroKnight.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Characters/Playable/Amazonian/Amazonian.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Characters/NonPlayable/Skeleton/Skeleton.tscn" type="PackedScene" id=6]
 
 [sub_resource type="TileSet" id=1]
 0/name = "Dungeon-1.png 0"
@@ -123,17 +123,17 @@ position = Vector2( 172, 88 )
 [node name="Box6" parent="GameObjects/Boxes" instance=ExtResource( 2 )]
 position = Vector2( 204, 88 )
 
+[node name="Huntress" parent="GameObjects" instance=ExtResource( 5 )]
+position = Vector2( 390.17, 124.23 )
+
 [node name="HeroKnight" parent="GameObjects" instance=ExtResource( 4 )]
-position = Vector2( 365, 166 )
+position = Vector2( 336.716, 238.265 )
 
-[node name="Skeleton" parent="GameObjects" instance=ExtResource( 5 )]
-position = Vector2( 182, 123 )
+[node name="Skeleton" parent="GameObjects" instance=ExtResource( 6 )]
+position = Vector2( 74.3459, 72.558 )
 
-[node name="Skeleton2" parent="GameObjects" instance=ExtResource( 5 )]
-position = Vector2( 116, 185 )
+[node name="Skeleton2" parent="GameObjects" instance=ExtResource( 6 )]
+position = Vector2( 159.427, 244.502 )
 
-[node name="Skeleton3" parent="GameObjects" instance=ExtResource( 5 )]
-position = Vector2( 88, 96 )
-
-[node name="Huntress" parent="GameObjects" instance=ExtResource( 6 )]
-position = Vector2( 338, 91 )
+[node name="Skeleton3" parent="GameObjects" instance=ExtResource( 6 )]
+position = Vector2( 530.487, 125.121 )

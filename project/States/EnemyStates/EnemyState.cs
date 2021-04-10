@@ -1,5 +1,5 @@
 ﻿using DungeonCrawler.AutoLoad;
-using DungeonCrawler.Enemies;
+using DungeonCrawler.Characters.NonPlayable;
 
 namespace DungeonCrawler.States.EnemyStates
 {
