@@ -1,39 +1,34 @@
-﻿using DungeonCrawler.AutoLoad;
-using DungeonCrawler.Characters.NonPlayable;
+﻿using DungeonCrawler.Characters.NonPlayable;
 using Godot;
 
 namespace DungeonCrawler.States.EnemyStates
 {
-    public class FollowState : State<EnemyCharacter>
+    public class ReturnState : State<EnemyCharacter>
     {
-        private Vector2 _preFollowPosition = Vector2.Zero;
-        
-        public FollowState(EnemyCharacter enemyCharacter) : base(enemyCharacter)
+        private Vector2 _positionToReturn;
+
+        public ReturnState(EnemyCharacter node, Vector2 positionToReturn) : base(node)
         {
+            _positionToReturn = positionToReturn;
         }
-        
+
         public override void Init()
         {
-            _preFollowPosition = Node.Position;
             Node.AnimationPlayer.Play("Run");
         }
 
         public override void Run(float delta)
         {
-            if (Node.Target is null)
+            if (_positionToReturn.DistanceTo(Node.Position) < 5)
             {
-                // finish follow state and return to last position before following target
                 Node.PopState();
-                Node.PushState(new ReturnState(Node, _preFollowPosition));
-                
                 return;
             }
-
-            var targetDirection = Node.Target.Position - Node.Position;
+            
+            var targetDirection = _positionToReturn - Node.Position;
             targetDirection = targetDirection.Normalized();
 
             Node.CharacterSprite.FlipH = targetDirection.x < 0;
-
             Node.MoveAndSlide(targetDirection * Node.MaxSpeed);
         }
 

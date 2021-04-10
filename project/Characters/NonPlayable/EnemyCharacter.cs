@@ -1,4 +1,5 @@
-﻿using DungeonCrawler.Extensions;
+﻿using System;
+using DungeonCrawler.Extensions;
 using DungeonCrawler.States;
 using DungeonCrawler.States.EnemyStates;
 using Godot;
@@ -9,6 +10,9 @@ namespace DungeonCrawler.Characters.NonPlayable
     {
         // Editable variables
         [Export] public bool IsAggressive = true;
+        
+        // Enemy properties
+        internal Vector2 StartPosition = Vector2.Zero; 
 
         // Other components
         public Node2D Target;
@@ -18,6 +22,8 @@ namespace DungeonCrawler.Characters.NonPlayable
             base._Ready();
             
             PushState(new IdleState(this));
+
+            StartPosition = Position;
         }
 
         public void OnTargetSpotted(Node2D target)
