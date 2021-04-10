@@ -8,9 +8,20 @@ namespace DungeonCrawler.Characters.NonPlayable
 {
     public class EnemyCharacter : Character
     {
-        // Editable variables
-        [Export] public bool IsAggressive = true;
+        private bool _isAggressive = true;
         
+        // Editable variables
+        [Export]
+        public bool IsAggressive
+        {
+            get { return _isAggressive; }
+            set
+            {
+                if (value == false) Target = null;
+                _isAggressive = value;
+            }
+        }
+
         // Enemy properties
         internal Vector2 StartPosition = Vector2.Zero; 
 
@@ -28,6 +39,9 @@ namespace DungeonCrawler.Characters.NonPlayable
 
         public void OnTargetSpotted(Node2D target)
         {
+            if (IsAggressive == false)
+                return;
+            
             Target = target;
         }
     
