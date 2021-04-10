@@ -8,13 +8,46 @@ namespace DungeonCrawler.Extensions
 {
     public static class NodeExtension
     {
+        public static TType GetParentNodeRecurse<TType>(this Node node, string parentName) 
+            where TType : Node
+        {
+            Node parent = null;
+            while ((parent = node.GetParent()) != null)
+            {
+                if (parent.Name.Equals(parentName))
+                    return (TType) parent;
+            }
+            
+            LoggingComponent.Logger.Error($"Could not find parent node with name '{parentName}' for node '{node.GetPath()}'");
+
+            return null;
+        }
+        
+        public static TType GetParentNodeRecurse<TType>(this Node node)
+            where TType : Node
+        {
+            var searchedForType = typeof(TType);
+            
+            Node parent = null;
+            while ((parent = node.GetParent()) != null)
+            {
+                var parentType = parent.GetType();
+                if (parentType == searchedForType || parentType.IsSubclassOf(searchedForType))
+                    return (TType) parent;
+            }
+            
+            LoggingComponent.Logger.Error($"Could not find parent node ot type '{nameof(TType)}' for node '{node.GetPath()}'");
+
+            return null;
+        }
+        
         public static TType GetChildNode<TType>(this Node node, string childName) 
             where TType : Node
         {
             var childNode = node.GetChildNodeOrNull<TType>(childName);
             if (childNode is null)
             {
-                LoggingComponent.Logger.Error($"Could not find node with name '{childName}' for parent '{node.GetPath()}'");   
+                LoggingComponent.Logger.Error($"Could not find child node with name '{childName}' for node '{node.GetPath()}'");   
             }
 
             return childNode;
@@ -32,7 +65,7 @@ namespace DungeonCrawler.Extensions
             var childNode = node.GetChildNodeOrNull<TType>();
             if (childNode is null)
             {
-                LoggingComponent.Logger.Error($"Could not find node of type '{typeof(TType).Name}' for parent '{node.GetPath()}'");
+                LoggingComponent.Logger.Error($"Could not find child node of type '{typeof(TType).Name}' for node '{node.GetPath()}'");
             }
 
             return childNode;
