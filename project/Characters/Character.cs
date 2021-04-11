@@ -1,6 +1,7 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
 using DungeonCrawler.AutoLoad;
 using DungeonCrawler.Combat;
+using DungeonCrawler.Components;
 using DungeonCrawler.Extensions;
 using DungeonCrawler.States;
 using DungeonCrawler.States.CommonStates;
@@ -29,6 +30,8 @@ namespace DungeonCrawler.Characters
         internal CharacterHitBox CharacterHitBox;
         internal CharacterHurtBox CharacterHurtBox;
         internal AnimationPlayer BlinkAnimationPlayer;
+
+        internal SoftCollision SoftCollision;
         
         public override void _Ready()
         {
@@ -43,6 +46,8 @@ namespace DungeonCrawler.Characters
             
             CharacterHurtBox = this.GetChildNode<CharacterHurtBox>();
             BlinkAnimationPlayer = this.GetChildNodeOrNull<AnimationPlayer>(nameof(BlinkAnimationPlayer));
+
+            SoftCollision = this.GetChildNodeOrNull<SoftCollision>();
         }
 
         public int StatesCount => State.StatesCount;

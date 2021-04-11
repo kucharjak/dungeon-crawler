@@ -5,16 +5,20 @@ namespace DungeonCrawler.States.CommonStates
 {
     public class DeathState : State<Character>
     {
-        private readonly CollisionShape2D _collisionShape;
+        private CollisionShape2D _hurtBoxCollisionShape;
+        private CollisionShape2D _softCollisionShape;
         
         public DeathState(Character node) : base(node)
         {
-            _collisionShape = Node.CharacterHurtBox.CollisionShape2D;
+            _hurtBoxCollisionShape = Node.CharacterHurtBox.CollisionShape2D;
+            _softCollisionShape = Node.SoftCollision?.CollisionShape2D;
         }
 
         public override void Init()
         {
-            _collisionShape.SetDeferred("disabled", true);
+            _hurtBoxCollisionShape.SetDeferred("disabled", true);
+            _softCollisionShape?.SetDeferred("disabled", true);
+
             Node.AnimationPlayer.Play("Death");
         }
     }

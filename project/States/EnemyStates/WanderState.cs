@@ -18,7 +18,7 @@ namespace DungeonCrawler.States.EnemyStates
 
         public override void Init()
         {
-            Node.AnimationPlayer.Play("Run");
+            Node.AnimationPlayer.Play("Walk");
         }
 
         public override void Run(float delta)
@@ -33,13 +33,13 @@ namespace DungeonCrawler.States.EnemyStates
             targetDirection = targetDirection.Normalized();
 
             Node.CharacterSprite.FlipH = targetDirection.x < 0;
-            Node.MoveAndSlide(targetDirection * Node.MaxSpeed);
+            Node.MoveAndSlide(targetDirection * (Node.MaxSpeed * 0.5f));
         }
 
         public override void End()
         {
             _wanderComponent.Restart();
-            Node.AnimationPlayer.Play("Run");
+            Node.AnimationPlayer.Play("Walk");
         }
     }
 }

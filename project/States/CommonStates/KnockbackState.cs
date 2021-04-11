@@ -24,7 +24,7 @@ namespace DungeonCrawler.States.CommonStates
         {
             _collisionShape.SetDeferred("disabled", true);
             _blinkAnimationPlayer?.Play("Blink");
-            _animationPlayer.Pause();
+            _animationPlayer.Play("Hit");
         }
 
         public override void Run(float delta)
@@ -44,7 +44,6 @@ namespace DungeonCrawler.States.CommonStates
             _collisionShape.SetDeferred("disabled", false);
             _blinkAnimationPlayer?.ForwardEnd();
             _blinkAnimationPlayer?.Stop();
-            _animationPlayer.Resume();
         }
     }
 }

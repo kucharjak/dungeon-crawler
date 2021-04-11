@@ -6,6 +6,8 @@ namespace DungeonCrawler.States.EnemyStates
 {
     public class FollowState : State<EnemyCharacter>
     {
+        [Export] public int FollowDistance = 25;
+        
         private Vector2 _preFollowPosition = Vector2.Zero;
         
         public FollowState(EnemyCharacter enemyCharacter) : base(enemyCharacter)
@@ -34,6 +36,13 @@ namespace DungeonCrawler.States.EnemyStates
 
             Node.CharacterSprite.FlipH = targetDirection.x < 0;
 
+            var targetDistance = Node.Target.Position.DistanceTo(Node.Position);
+            if (targetDistance < FollowDistance)
+            {
+                Node.PushState(new SingleAttackState(Node));
+                return;
+            }
+            
             Node.MoveAndSlide(targetDirection * Node.MaxSpeed);
         }
 
