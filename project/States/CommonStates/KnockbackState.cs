@@ -1,5 +1,6 @@
 ﻿using DungeonCrawler.Characters;
 using DungeonCrawler.Combat;
+using DungeonCrawler.Extensions;
 using Godot;
 
 namespace DungeonCrawler.States.CommonStates
@@ -8,12 +9,14 @@ namespace DungeonCrawler.States.CommonStates
     {
         private Vector2 _knockbackPower;
         private CollisionShape2D _collisionShape;
+        private AnimationPlayer _animationPlayer; 
         private AnimationPlayer _blinkAnimationPlayer; 
 
         public KnockbackState(Character node, Vector2 knockbackPower) : base(node)
         {
             _knockbackPower = knockbackPower;
             _collisionShape = Node.CharacterHurtBox.CollisionShape2D;
+            _animationPlayer = Node.AnimationPlayer;
             _blinkAnimationPlayer = node.BlinkAnimationPlayer;
         }
 
@@ -21,6 +24,7 @@ namespace DungeonCrawler.States.CommonStates
         {
             _collisionShape.SetDeferred("disabled", true);
             _blinkAnimationPlayer?.Play("Blink");
+            _animationPlayer.Pause();
         }
 
         public override void Run(float delta)
@@ -38,7 +42,9 @@ namespace DungeonCrawler.States.CommonStates
         public override void End()
         {
             _collisionShape.SetDeferred("disabled", false);
+            _blinkAnimationPlayer?.ForwardEnd();
             _blinkAnimationPlayer?.Stop();
+            _animationPlayer.Resume();
         }
     }
 }

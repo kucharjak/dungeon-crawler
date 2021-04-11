@@ -10,6 +10,7 @@ namespace DungeonCrawler.Combat
     public class CharacterHitBox : Area2D, IAttackable<Character>
     {
         [Export] public AttackType AttackType = AttackType.Basic;
+        [Export] public int KnockbackPower = 200;
         
         protected Character Character;
 
@@ -39,7 +40,7 @@ namespace DungeonCrawler.Combat
             {
                 var damage = GetDamageAmount(AttackType.Basic);
                 var knockbackPower = (((Area2D) area).GlobalPosition - Character.GlobalPosition).Normalized();
-                knockbackPower *= 250;
+                knockbackPower *= KnockbackPower;
 
                 destructible.ReceiveDamage(damage, knockbackPower);
             }
