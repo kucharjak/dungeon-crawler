@@ -26,9 +26,15 @@ namespace DungeonCrawler.States.PlayerStates
                 Node.AnimationPlayer.Play("Idle");
                 Node.Velocity = Node.Velocity.MoveToward(Vector2.Zero, Node.Friction * delta);
             }
-            
+
             if (Node.Velocity.x != 0)
-                Node.CharacterSprite.FlipH = Node.Velocity.x < 0;
+            {
+                var flip = Node.Velocity.x < 0;
+
+                Node.CharacterSprite.FlipH = flip;
+                Node.CharacterHitBox.Scale = new Vector2(flip ? -1 : 1, Node.CharacterHitBox.Scale.y);
+            }
+                
 
             Attack(controller);
             

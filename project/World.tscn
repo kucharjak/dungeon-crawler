@@ -93,6 +93,7 @@
 3/z_index = 0
 
 [node name="World" type="Node2D"]
+position = Vector2( -0.44545, -0.445435 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( -2, -1 )
@@ -127,13 +128,13 @@ position = Vector2( 204, 88 )
 position = Vector2( 154.972, 44.4944 )
 
 [node name="HeroKnight" parent="GameObjects" instance=ExtResource( 4 )]
-position = Vector2( 73.4554, 109.53 )
+position = Vector2( 61.8737, 108.639 )
 
 [node name="Skeleton" parent="GameObjects" instance=ExtResource( 6 )]
-position = Vector2( 460.551, 267.665 )
+position = Vector2( 396.812, 245.306 )
 
 [node name="Skeleton2" parent="GameObjects" instance=ExtResource( 6 )]
-position = Vector2( 144.282, 247.175 )
+position = Vector2( 175.205, 268.31 )
 
 [node name="Skeleton3" parent="GameObjects" instance=ExtResource( 6 )]
-position = Vector2( 464.115, 58.7489 )
+position = Vector2( 463.003, 93.7885 )

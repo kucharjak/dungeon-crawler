@@ -11,6 +11,8 @@ namespace DungeonCrawler.Components
     {
         [Export] public int WanderDistance = 100;
 
+        [Export] public bool WanderingEnabled = true;
+
         private EnemyCharacter _parent;
 
         public override void _Ready()
@@ -22,9 +24,7 @@ namespace DungeonCrawler.Components
 
         public void OnTimeout()
         {
-            LoggingComponent.Logger.Debug($"{nameof(WanderComponent)} - {nameof(OnTimeout)} called");
-
-            if (_parent.PeekState().GetType() != typeof(IdleState))
+            if (WanderingEnabled == false || _parent.PeekState().GetType() != typeof(IdleState))
             {
                 this.Restart();
                 return;

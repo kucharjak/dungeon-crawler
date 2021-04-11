@@ -3,7 +3,7 @@
     public interface IStateComponent<TState>
         where TState : IState
     {
-        int Count { get; }
+        int StatesCount { get; }
         
         void PushState(TState newState);
 

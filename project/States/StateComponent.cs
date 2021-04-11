@@ -19,7 +19,7 @@ namespace DungeonCrawler.States
             actualState.Run(delta);
         }
         
-        public virtual int Count => States.Count;
+        public virtual int StatesCount => States.Count;
 
         public virtual void PushState(IState newState)
         {

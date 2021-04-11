@@ -1,4 +1,5 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
 using System.Linq;
 using DungeonCrawler.AutoLoad;
 using DungeonCrawler.Exceptions;
@@ -8,6 +9,17 @@ namespace DungeonCrawler.Extensions
 {
     public static class NodeExtension
     {
+        public static void ChangeValueAndEmitSignal<TValue>(this Node node, string signalName, ref TValue changedValueRef, TValue newValue)
+            where TValue : struct
+        {
+            var oldValue = changedValueRef;
+
+            changedValueRef = newValue;
+            
+            if (!newValue.Equals(oldValue))
+                node.EmitSignal(signalName, oldValue, newValue);
+        }
+        
         public static TType GetParentNodeRecurse<TType>(this Node node, string parentName) 
             where TType : Node
         {
@@ -65,7 +77,8 @@ namespace DungeonCrawler.Extensions
             var childNode = node.GetChildNodeOrNull<TType>();
             if (childNode is null)
             {
-                LoggingComponent.Logger.Error($"Could not find child node of type '{typeof(TType).Name}' for node '{node.GetPath()}'");
+                // LoggingComponent.Logger.Error($"Could not find child node of type '{typeof(TType).Name}' for node '{node.GetPath()}'");
+                throw new MissingChildNodeException($"Could not find child node of type '{typeof(TType).Name}' for node '{node.GetPath()}'");
             }
 
             return childNode;
