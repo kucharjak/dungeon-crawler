@@ -1,4 +1,5 @@
 ﻿using System;
+using DungeonCrawler.Combat;
 using DungeonCrawler.Extensions;
 using DungeonCrawler.States;
 using DungeonCrawler.States.EnemyStates;
@@ -27,10 +28,16 @@ namespace DungeonCrawler.Characters.NonPlayable
 
         // Other components
         public Node2D Target;
+        public HpIndicator HpIndicator; 
 
         public override void _Ready()
         {
             base._Ready();
+            
+            HpIndicator = this.GetChildNode<HpIndicator>();
+            Stats.Connect(nameof(Stats.HpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeHp));
+            Stats.Connect(nameof(Stats.MaxHpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeMaxHP));
+            HpIndicator.UpdateHealthIndication();
             
             PushState(new IdleState(this));
 
