@@ -34,7 +34,6 @@ namespace DungeonCrawler.States.PlayerStates
                 Node.CharacterSprite.FlipH = flip;
                 Node.CharacterHitBox.Scale = new Vector2(flip ? -1 : 1, Node.CharacterHitBox.Scale.y);
             }
-                
 
             Attack(controller);
             

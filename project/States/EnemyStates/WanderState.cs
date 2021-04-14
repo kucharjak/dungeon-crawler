@@ -25,15 +25,25 @@ namespace DungeonCrawler.States.EnemyStates
         {
             if (_wanderPosition.DistanceTo(Node.Position) < 5)
             {
+                Node.Velocity = Vector2.Zero;
                 Node.PopState();
                 return;
             }
             
             var targetDirection = _wanderPosition - Node.Position;
             targetDirection = targetDirection.Normalized();
+            
+            Node.Velocity = Node.Velocity.MoveToward(targetDirection * (Node.MaxSpeed * 0.5f), Node.Acceleration * delta);
 
-            Node.CharacterSprite.FlipH = targetDirection.x < 0;
-            Node.MoveAndSlide(targetDirection * (Node.MaxSpeed * 0.5f));
+            if (Node.Velocity.x != 0)
+            {
+                var flip = Node.Velocity.x < 0;
+
+                Node.CharacterSprite.FlipH = flip;
+                Node.CharacterHitBox.Scale = new Vector2(flip ? -1 : 1, Node.CharacterHitBox.Scale.y);
+            }
+            
+            Node.MoveAndSlide(Node.Velocity);
         }
 
         public override void End()

@@ -13,7 +13,7 @@ namespace DungeonCrawler.Characters.NonPlayable.Skeleton
             base._Ready();
             
             // Random scale of skeleton for variety 
-            var randomScale = (float)RandomGenerator.Random.Next(95, 105);
+            var randomScale = (float)RandomGenerator.Random.Next(90, 120);
             randomScale /= 100;
 
             Scale *= randomScale;

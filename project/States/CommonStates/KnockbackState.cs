@@ -42,7 +42,7 @@ namespace DungeonCrawler.States.CommonStates
         public override void End()
         {
             _collisionShape.SetDeferred("disabled", false);
-            _blinkAnimationPlayer?.ForwardEnd();
+            _blinkAnimationPlayer?.ToEnd();
             _blinkAnimationPlayer?.Stop();
         }
     }

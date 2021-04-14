@@ -23,6 +23,7 @@ namespace DungeonCrawler.Characters
         // Other components
         internal Sprite CharacterSprite;
         internal AnimationPlayer AnimationPlayer;
+        internal CollisionShape2D CollisionShape2D;
         
         internal StateComponent State;
          
@@ -30,13 +31,16 @@ namespace DungeonCrawler.Characters
         internal CharacterHitBox CharacterHitBox;
         internal CharacterHurtBox CharacterHurtBox;
         internal AnimationPlayer BlinkAnimationPlayer;
-
+        
         internal SoftCollision SoftCollision;
+        
+        protected HpIndicator HpIndicator;
         
         public override void _Ready()
         {
-            CharacterSprite = this.GetChildNode<Sprite>("CharacterSprite");
+            CharacterSprite = this.GetChildNode<Sprite>(nameof(CharacterSprite));
             AnimationPlayer = this.GetChildNode<AnimationPlayer>();
+            CollisionShape2D = this.GetChildNode<CollisionShape2D>(nameof(CollisionShape2D));
             
             State = this.GetChildNode<StateComponent>();
             
@@ -86,17 +90,6 @@ namespace DungeonCrawler.Characters
             return this;
         }
 
-        public void ReceiveDamage(int damageAmount, Vector2 knockbackPower)
-        {
-            Stats.Hp -= damageAmount;
-
-            if (Stats.Hp <= 0)
-            {
-                PushState(new DeathState(this));
-                return;
-            }
-            
-            PushState(new KnockbackState(this, knockbackPower));
-        }
+        public abstract void ReceiveDamage(int damageAmount, Vector2 knockbackPower);
     }
 }

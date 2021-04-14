@@ -20,7 +20,6 @@ namespace DungeonCrawler.Combat
         public override void _Ready()
         {
             Character = this.GetParentNodeRecurse<Character>();
-            
             CollisionShape2D = this.GetChildNode<CollisionShape2D>();
         }
 

@@ -19,11 +19,20 @@ namespace DungeonCrawler.Extensions
         {
             animationPlayer.Play();
         }
+        
+        /// <summary>
+        /// Jumps to the first frame of actual animation.
+        /// </summary>
+        /// <param name="animationPlayer"></param>
+        public static void ToStart(this AnimationPlayer animationPlayer)
+        {
+            animationPlayer.Seek(0f, true);
+        }
 
         /// <summary>
         /// Jumps to the last frame of actual animation.
         /// </summary>
-        public static void ForwardEnd(this AnimationPlayer animationPlayer)
+        public static void ToEnd(this AnimationPlayer animationPlayer)
         {
             animationPlayer.Seek(animationPlayer.CurrentAnimationLength, true);
         }

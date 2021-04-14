@@ -1,4 +1,5 @@
 ﻿using DungeonCrawler.Characters.NonPlayable;
+using DungeonCrawler.Extensions;
 
 namespace DungeonCrawler.States.EnemyStates
 {
@@ -19,6 +20,18 @@ namespace DungeonCrawler.States.EnemyStates
                 return;
             
             Node.PopState();
+        }
+
+        public override void Pause()
+        {
+            Node.AnimationPlayer.ToStart();
+            Node.AnimationPlayer.Stop();
+        }
+
+        public override void End()
+        {
+            Node.AnimationPlayer.ToStart();
+            Node.AnimationPlayer.Stop();
         }
     }
 }
