@@ -61,6 +61,7 @@ namespace DungeonCrawler.Characters.Playable
         public override void Die()
         {
             CharacterHurtBox.Disable();
+            CharacterHitBox.Disable();
             
             CollisionShape2D.SetDeferred("disabled", true);
             AnimationPlayer.Play("Death");

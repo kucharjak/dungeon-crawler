@@ -44,5 +44,15 @@ namespace DungeonCrawler.Combat
                 destructible.ReceiveDamage(damage, knockbackPower);
             }
         }
+        
+        public void Disable()
+        {
+            CollisionShape2D.SetDeferred("disabled", true);
+        }
+
+        public void Enable()
+        {
+            CollisionShape2D.SetDeferred("disabled", false);
+        }
     }
 }

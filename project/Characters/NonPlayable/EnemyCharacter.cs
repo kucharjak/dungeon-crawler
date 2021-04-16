@@ -55,6 +55,7 @@ namespace DungeonCrawler.Characters.NonPlayable
         public override void Die()
         {
             CharacterHurtBox.Disable();
+            CharacterHitBox.Disable();
             
             CollisionShape2D.SetDeferred("disabled", true);
             SoftCollision.CollisionShape2D.SetDeferred("disabled", true);

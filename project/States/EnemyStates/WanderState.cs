@@ -18,6 +18,12 @@ namespace DungeonCrawler.States.EnemyStates
 
         public override void Run(float delta)
         {
+            if (Node.GetTarget() != null)
+            {
+                Node.PushState(new FollowState(Node));
+                return;
+            }
+
             if (_wanderPosition.DistanceTo(Node.Position) < 5)
             {
                 Node.ApplyVelocity(Vector2.Zero);
