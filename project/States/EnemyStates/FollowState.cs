@@ -22,8 +22,9 @@ namespace DungeonCrawler.States.EnemyStates
         }
 
         public override void Run(float delta)
-        { 
-            if (Node.Target is null)
+        {
+            var target = Node.GetTarget(); 
+            if (target is null)
             {
                 // finish follow state and return to last position before following target
                 Node.PopState();
@@ -32,7 +33,7 @@ namespace DungeonCrawler.States.EnemyStates
                 return;
             }
 
-            var targetDirection = Node.Target.Position - Node.Position;
+            var targetDirection = target.Position - Node.Position;
             targetDirection = targetDirection.Normalized();
             
             Node.Velocity = Node.Velocity.MoveToward(targetDirection * Node.MaxSpeed, Node.Acceleration * delta);
@@ -45,11 +46,11 @@ namespace DungeonCrawler.States.EnemyStates
                 Node.CharacterHitBox.Scale = new Vector2(flip ? -1 : 1, Node.CharacterHitBox.Scale.y);
             }
 
-            var targetDistance = Node.Target.Position.DistanceTo(Node.Position);
+            var targetDistance = target.Position.DistanceTo(Node.Position);
             if (targetDistance >= FollowDistance)
             {
                 // finish follow state and return to last position before following target
-                Node.Target = null;
+                Node.OnTargetLost(target);
                 Node.PopState();
                 Node.PushState(new ReturnState(Node, _preFollowPosition));
                 

@@ -6,7 +6,7 @@ using Godot;
 
 namespace DungeonCrawler.Combat
 {
-    public class HpIndicator : Node2D
+    public sealed class HpIndicator : Node2D
     {
         private ColorRect _baseColor;
         private ColorRect _healthColor;
@@ -32,10 +32,9 @@ namespace DungeonCrawler.Combat
             UpdateHealthIndication();
             
             var width = _baseColor.RectSize.x;
-            var stats = _character.Stats;
             
             var lossValue = oldValue - newValue;
-            var lossWidth = width * (lossValue / (float) stats.MaxHp);
+            var lossWidth = width * (lossValue / (float) _character.GetMaxHpValue());
             
             _lossHealthColor.RectSize = new Vector2(lossWidth, _lossHealthColor.RectSize.y);
             _lossHealthColor.RectPosition = new Vector2(_healthColor.RectSize.x, _lossHealthColor.RectPosition.y);
@@ -51,9 +50,8 @@ namespace DungeonCrawler.Combat
         public void UpdateHealthIndication()
         {
             var width = _baseColor.RectSize.x;
-            var stats = _character.Stats;
             
-            var healthWidth = width * (stats.Hp / (float) stats.MaxHp);
+            var healthWidth = width * (_character.GetHpValue() / (float) _character.GetMaxHpValue());
 
             _healthColor.RectSize = new Vector2(healthWidth, _healthColor.RectSize.y);
         }

@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices.ComTypes;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using DungeonCrawler.AutoLoad;
 using DungeonCrawler.Combat;
 using DungeonCrawler.Components;
@@ -12,30 +13,31 @@ namespace DungeonCrawler.Characters
 {
     public abstract class Character : KinematicBody2D, IStateComponent<IState>, ICombatable<Character>
     {
-        // Editable variables
+        // Exported variables
         [Export] public int MaxSpeed = 120;
         [Export] public int Acceleration = 600;
         [Export] public int Friction = 800;
+        [Export] public float InvincibilityTimeout = 0.5f;
         
-        // Character variables
-        internal Vector2 Velocity = Vector2.Zero;
+        // Public character variables
+        public Vector2 Velocity = Vector2.Zero;
         
-        // Other components
-        internal Sprite CharacterSprite;
-        internal AnimationPlayer AnimationPlayer;
-        internal CollisionShape2D CollisionShape2D;
+        // Protected components
+        public Sprite CharacterSprite;
+        public AnimationPlayer AnimationPlayer;
+        protected CollisionShape2D CollisionShape2D;
         
-        internal StateComponent State;
+        protected StateComponent State;
          
-        internal Stats Stats;
-        internal CharacterHitBox CharacterHitBox;
-        internal CharacterHurtBox CharacterHurtBox;
+        protected Stats Stats;
+        public CharacterHitBox CharacterHitBox;
+        protected CharacterHurtBox CharacterHurtBox;
         internal AnimationPlayer BlinkAnimationPlayer;
         
         internal SoftCollision SoftCollision;
         
         protected HpIndicator HpIndicator;
-        
+
         public override void _Ready()
         {
             CharacterSprite = this.GetChildNode<Sprite>(nameof(CharacterSprite));
@@ -52,6 +54,8 @@ namespace DungeonCrawler.Characters
             BlinkAnimationPlayer = this.GetChildNodeOrNull<AnimationPlayer>(nameof(BlinkAnimationPlayer));
 
             SoftCollision = this.GetChildNodeOrNull<SoftCollision>();
+
+            CharacterHurtBox.Connect(nameof(CharacterHurtBox.DamageReceived), this, nameof(ReceiveDamage));
         }
 
         public int StatesCount => State.StatesCount;
@@ -70,6 +74,10 @@ namespace DungeonCrawler.Characters
         {
             return State.PeekState();
         }
+
+        public int GetHpValue() => Stats.Hp;
+
+        public int GetMaxHpValue() => Stats.MaxHp;
 
         public int GetDamageAmount(AttackType attackType)
         {
@@ -91,5 +99,11 @@ namespace DungeonCrawler.Characters
         }
 
         public abstract void ReceiveDamage(int damageAmount, Vector2 knockbackPower);
+
+        public abstract void Die();
+
+        public abstract void StartInvincibility();
+
+        public abstract void EndInvincibility();
     }
 }

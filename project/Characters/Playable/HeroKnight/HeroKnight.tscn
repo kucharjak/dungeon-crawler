@@ -7,16 +7,15 @@
 [ext_resource path="res://Combat/CharacterHitbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Combat/CharacterHurtBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Combat/HpIndicator.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Combat/InvincibilityTimer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Combat/InvincibilityComponent.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Effects/Shaders/WhiteOverlay.shader" type="Shader" id=9]
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 9 )
 shader_param/active = false
 
-[sub_resource type="Animation" id=1]
-resource_name = "Attack"
+[sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharacterSprite:frame")
@@ -67,7 +66,7 @@ tracks/3/keys = {
 "values": [ Vector2( 5, 20 ), Vector2( 23, 23 ), Vector2( 10, 20 ) ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=3]
 resource_name = "Death"
 length = 0.9
 tracks/0/type = "value"
@@ -95,7 +94,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -135,7 +134,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -151,19 +150,18 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12, 13 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=6]
 radius = 4.16756
 height = 10.2255
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 5, 20 )
 
-[sub_resource type="CapsuleShape2D" id=6]
+[sub_resource type="CapsuleShape2D" id=8]
 radius = 6.0
 height = 10.5
 
-[sub_resource type="Animation" id=7]
-resource_name = "Blink"
+[sub_resource type="Animation" id=9]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -194,7 +192,7 @@ SpecialSkillDamage = 2
 [node name="StateComponent" parent="." instance=ExtResource( 3 )]
 
 [node name="CharacterSprite" type="Sprite" parent="."]
-material = SubResource( 8 )
+material = SubResource( 1 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, -22 )
 vframes = 9
@@ -203,21 +201,21 @@ frame = 18
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Attack = SubResource( 1 )
-anims/Death = SubResource( 9 )
-anims/Idle = SubResource( 2 )
-anims/Run = SubResource( 3 )
+anims/Attack = SubResource( 2 )
+anims/Death = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+anims/Run = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 
 [node name="CharacterHitBox" parent="." instance=ExtResource( 5 )]
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="CharacterHitBox" index="0"]
 position = Vector2( 10, -20 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 disabled = true
 
 [node name="CharacterHurtBox" parent="." instance=ExtResource( 6 )]
@@ -225,15 +223,16 @@ collision_layer = 4
 
 [node name="CollisionShape2D" parent="CharacterHurtBox" index="0"]
 position = Vector2( 0, -16 )
-shape = SubResource( 6 )
+shape = SubResource( 8 )
 
 [node name="HpIndicator" parent="." instance=ExtResource( 7 )]
 position = Vector2( -24, -51.125 )
 
-[node name="InvincibilityTimer" parent="." instance=ExtResource( 8 )]
-
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Blink = SubResource( 7 )
+anims/Blink = SubResource( 9 )
+
+[node name="InvincibilityComponent" parent="." instance=ExtResource( 8 )]
+InvincibilityTimeout = 0.5
 
 [editable path="CharacterHitBox"]
 

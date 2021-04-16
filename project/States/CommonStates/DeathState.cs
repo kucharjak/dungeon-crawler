@@ -11,11 +11,7 @@ namespace DungeonCrawler.States.CommonStates
 
         public override void Init()
         {
-            Node.CollisionShape2D.SetDeferred("disabled", true);
-            Node.CharacterHurtBox.CollisionShape2D.SetDeferred("disabled", true);
-            Node.SoftCollision?.CollisionShape2D.SetDeferred("disabled", true);
-
-            Node.AnimationPlayer.Play("Death");
+            Node.Die();
         }
     }
 }

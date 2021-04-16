@@ -6,7 +6,7 @@ using Godot;
 
 namespace DungeonCrawler.Characters.NonPlayable.Skeleton
 {
-    public class Skeleton : EnemyCharacter
+    public sealed class Skeleton : EnemyCharacter
     {
         public override void _Ready()
         {

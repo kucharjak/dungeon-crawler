@@ -10,27 +10,15 @@ namespace DungeonCrawler.Characters.NonPlayable
 {
     public class EnemyCharacter : Character
     {
-        private bool _isAggressive = true;
-        
         // Editable variables
-        [Export]
-        public bool IsAggressive
-        {
-            get { return _isAggressive; }
-            set
-            {
-                if (value == false) Target = null;
-                _isAggressive = value;
-            }
-        }
+        [Export] public bool IsAggressive = true;
 
-        // Enemy properties
-        internal Vector2 StartPosition = Vector2.Zero;
+        // Public properties
+        public Vector2 StartPosition = Vector2.Zero;
 
-        internal DetectionZone DetectionZone;
-
-        // Other components
-        public Node2D Target; 
+        // Protected components
+        protected DetectionZone DetectionZone;
+        protected Node2D Target;
 
         public override void _Ready()
         {
@@ -63,6 +51,32 @@ namespace DungeonCrawler.Characters.NonPlayable
             
             PushState(new KnockbackState(this, knockbackPower));
         }
+
+        public override void Die()
+        {
+            CharacterHurtBox.Disable();
+            
+            CollisionShape2D.SetDeferred("disabled", true);
+            SoftCollision.CollisionShape2D.SetDeferred("disabled", true);
+
+            AnimationPlayer.Play("Death");
+        }
+
+        public override void StartInvincibility()
+        {
+            CharacterHurtBox.Disable();
+            BlinkAnimationPlayer.Play("Blink");
+            AnimationPlayer.Play("Hit");
+        }
+
+        public override void EndInvincibility()
+        {
+            CharacterHurtBox.Enable();
+            BlinkAnimationPlayer.ToEnd();
+            BlinkAnimationPlayer.Stop();
+        }
+
+        public Node2D GetTarget() => Target;
 
         public void OnTargetSpotted(Node2D target)
         {

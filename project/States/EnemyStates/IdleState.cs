@@ -15,7 +15,7 @@ namespace DungeonCrawler.States.EnemyStates
     
         public override void Run(float delta)
         {
-            if (Node.Target is null)
+            if (Node.GetTarget() is null)
                 return;
             
             Node.PushState(new FollowState(Node));
