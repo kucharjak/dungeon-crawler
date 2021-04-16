@@ -16,7 +16,7 @@
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 11 )
-shader_param/active = false
+shader_param/active = true
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 2.61357
@@ -297,6 +297,7 @@ shape = SubResource( 13 )
 
 [node name="WanderComponent" parent="." instance=ExtResource( 5 )]
 wait_time = 5.0
+autostart = false
 
 [node name="HpIndicator" parent="." instance=ExtResource( 10 )]
 visible = false

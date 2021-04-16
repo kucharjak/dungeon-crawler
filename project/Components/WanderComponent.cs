@@ -10,6 +10,8 @@ namespace DungeonCrawler.Components
     public class WanderComponent : Timer
     {
         [Export] public int WanderDistance = 100;
+        
+        [Export] public float WanderTimeout = 10f;
 
         [Export] public bool WanderingEnabled = true;
 
@@ -20,13 +22,16 @@ namespace DungeonCrawler.Components
             base._Ready();
 
             _parent = this.GetParentNodeRecurse<EnemyCharacter>();
+
+            Connect("timeout", this, nameof(OnTimeout));
+            Start((float)(RandomGenerator.Random.NextDouble() * WanderTimeout));
         }
 
         public void OnTimeout()
         {
             if (WanderingEnabled == false || _parent.PeekState().GetType() != typeof(IdleState))
             {
-                this.Restart();
+                this.Restart(WanderTimeout);
                 return;
             }
 

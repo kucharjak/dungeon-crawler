@@ -21,6 +21,8 @@ namespace DungeonCrawler.Combat
         {
             Character = this.GetParentNodeRecurse<Character>();
             CollisionShape2D = this.GetChildNode<CollisionShape2D>();
+
+            Connect("area_entered", this, nameof(OnAreaEntered));
         }
 
         public int GetDamageAmount(AttackType attackType)

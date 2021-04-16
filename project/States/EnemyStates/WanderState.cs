@@ -41,7 +41,7 @@ namespace DungeonCrawler.States.EnemyStates
 
         public override void End()
         {
-            _wanderComponent.Restart();
+            _wanderComponent.Restart(_wanderComponent.WanderTimeout);
         }
     }
 }
