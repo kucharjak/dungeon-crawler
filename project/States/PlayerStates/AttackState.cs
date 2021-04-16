@@ -11,12 +11,12 @@ namespace DungeonCrawler.States.PlayerStates
 
         public override void Init()
         {
-            Node.AnimationPlayer.Play("Attack");
+            Node.Attack();
         }
 
         public override void Run(float delta)
         {
-            if (Node.AnimationPlayer.IsPlaying())
+            if (Node.IsAttacking)
                 return;
             
             Node.PopState();

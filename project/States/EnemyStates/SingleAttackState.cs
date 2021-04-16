@@ -11,27 +11,15 @@ namespace DungeonCrawler.States.EnemyStates
         
         public override void Init()
         {
-            Node.AnimationPlayer.Play("Attack");
+            Node.Attack();
         }
 
         public override void Run(float delta)
         {
-            if (Node.AnimationPlayer.IsPlaying())
+            if (Node.IsAttacking)
                 return;
             
             Node.PopState();
-        }
-
-        public override void Pause()
-        {
-            Node.AnimationPlayer.ToStart();
-            Node.AnimationPlayer.Stop();
-        }
-
-        public override void End()
-        {
-            Node.AnimationPlayer.ToStart();
-            Node.AnimationPlayer.Stop();
         }
     }
 }

@@ -7,11 +7,6 @@ namespace DungeonCrawler.States.EnemyStates
         public IdleState(EnemyCharacter enemyCharacter) : base(enemyCharacter)
         {
         }
-        
-        public override void Init()
-        {
-            Node.AnimationPlayer.Play("Idle");
-        }
     
         public override void Run(float delta)
         {
@@ -19,11 +14,6 @@ namespace DungeonCrawler.States.EnemyStates
                 return;
             
             Node.PushState(new FollowState(Node));
-        }
-
-        public override void Resume()
-        {
-            Node.AnimationPlayer.Play("Idle");
         }
     }
 }

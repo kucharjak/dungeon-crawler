@@ -1,5 +1,6 @@
 ﻿using System;
 using DungeonCrawler.Combat;
+using DungeonCrawler.Components;
 using DungeonCrawler.Extensions;
 using DungeonCrawler.States;
 using DungeonCrawler.States.CommonStates;
@@ -17,6 +18,7 @@ namespace DungeonCrawler.Characters.NonPlayable
         public Vector2 StartPosition = Vector2.Zero;
 
         // Protected components
+        protected SoftCollision SoftCollision;
         protected DetectionZone DetectionZone;
         protected Node2D Target;
 
@@ -24,9 +26,7 @@ namespace DungeonCrawler.Characters.NonPlayable
         {
             base._Ready();
             
-            HpIndicator = this.GetChildNode<HpIndicator>();
-            Stats.Connect(nameof(Stats.HpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeHp));
-            Stats.Connect(nameof(Stats.MaxHpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeMaxHP));
+            SoftCollision = this.GetChildNodeOrNull<SoftCollision>();
 
             DetectionZone = this.GetChildNode<DetectionZone>();
             DetectionZone.Connect(nameof(DetectionZone.TargetSpotted), this, nameof(OnTargetSpotted));
