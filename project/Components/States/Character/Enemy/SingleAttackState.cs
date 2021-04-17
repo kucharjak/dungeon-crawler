@@ -1,14 +1,13 @@
-﻿using DungeonCrawler.Characters.Playable;
-using Godot;
+﻿using DungeonCrawler.Characters.NonPlayable;
 
-namespace DungeonCrawler.States.PlayerStates
+namespace DungeonCrawler.Components.States.Character.Enemy
 {
-    public class AttackState : State<PlayerCharacter>
+    public class SingleAttackState : State<EnemyCharacter>
     {
-        public AttackState(PlayerCharacter node) : base(node)
+        public SingleAttackState(EnemyCharacter node) : base(node)
         {
         }
-
+        
         public override void Init()
         {
             Node.Attack();

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
-using DungeonCrawler.States.CommonStates;
 using Godot;
 
-namespace DungeonCrawler.States
+namespace DungeonCrawler.Components.States
 {
     public class StateComponent : Node, IStateComponent<IState>
     {

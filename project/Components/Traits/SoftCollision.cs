@@ -3,7 +3,7 @@ using DungeonCrawler.Characters;
 using DungeonCrawler.Extensions;
 using Godot;
 
-namespace DungeonCrawler.Components
+namespace DungeonCrawler.Components.Traits
 {
     public class SoftCollision : Area2D
     {

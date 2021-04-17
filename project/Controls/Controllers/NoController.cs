@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-namespace DungeonCrawler.Controls
+namespace DungeonCrawler.Controls.Controllers
 {
     public class NoController : IController
     {

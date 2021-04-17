@@ -1,8 +1,7 @@
-﻿using DungeonCrawler.AutoLoad;
-using DungeonCrawler.Characters.NonPlayable;
+﻿using DungeonCrawler.Characters.NonPlayable;
 using Godot;
 
-namespace DungeonCrawler.States.EnemyStates
+namespace DungeonCrawler.Components.States.Character.Enemy
 {
     public class FollowState : State<EnemyCharacter>
     {

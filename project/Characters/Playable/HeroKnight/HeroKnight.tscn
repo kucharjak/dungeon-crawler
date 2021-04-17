@@ -2,13 +2,14 @@
 
 [ext_resource path="res://Characters/Playable/HeroKnight/HeroKnight.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Playable/HeroKnight/HeroKnight.cs" type="Script" id=2]
-[ext_resource path="res://States/StateComponent.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Components/States/StateComponent.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Combat/Stats.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Combat/CharacterHitbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Combat/CharacterHurtBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Combat/HpIndicator.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Combat/InvincibilityComponent.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Effects/Shaders/WhiteOverlay.shader" type="Shader" id=9]
+
 
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true

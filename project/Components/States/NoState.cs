@@ -1,6 +1,6 @@
 ﻿using DungeonCrawler.AutoLoad;
 
-namespace DungeonCrawler.States.CommonStates
+namespace DungeonCrawler.Components.States
 {
     public class NoState : IState
     {

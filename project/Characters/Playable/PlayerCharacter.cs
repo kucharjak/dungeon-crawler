@@ -2,10 +2,11 @@
 using DungeonCrawler.AutoLoad;
 using DungeonCrawler.Characters.Playable.HeroKnight;
 using DungeonCrawler.Combat;
+using DungeonCrawler.Components.States.Character;
+using DungeonCrawler.Components.States.Character.Player;
 using DungeonCrawler.Controls;
+using DungeonCrawler.Controls.Controllers;
 using DungeonCrawler.Extensions;
-using DungeonCrawler.States.CommonStates;
-using DungeonCrawler.States.PlayerStates;
 using Godot;
 
 namespace DungeonCrawler.Characters.Playable

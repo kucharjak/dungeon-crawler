@@ -1,7 +1,7 @@
 ﻿using DungeonCrawler.Characters.NonPlayable;
 using Godot;
 
-namespace DungeonCrawler.States.EnemyStates
+namespace DungeonCrawler.Components.States.Character.Enemy
 {
     public class ReturnState : State<EnemyCharacter>
     {

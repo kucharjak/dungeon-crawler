@@ -1,9 +1,7 @@
-﻿using DungeonCrawler.Characters;
-using DungeonCrawler.Characters.Playable;
-using DungeonCrawler.Controls;
+﻿using DungeonCrawler.Characters.Playable;
 using Godot;
 
-namespace DungeonCrawler.States.PlayerStates
+namespace DungeonCrawler.Components.States.Character.Player
 {
     public class MoveState : State<PlayerCharacter>
     {

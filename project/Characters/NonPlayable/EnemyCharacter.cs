@@ -1,10 +1,10 @@
 ﻿using System;
 using DungeonCrawler.Combat;
 using DungeonCrawler.Components;
+using DungeonCrawler.Components.States.Character;
+using DungeonCrawler.Components.States.Character.Enemy;
+using DungeonCrawler.Components.Traits;
 using DungeonCrawler.Extensions;
-using DungeonCrawler.States;
-using DungeonCrawler.States.CommonStates;
-using DungeonCrawler.States.EnemyStates;
 using Godot;
 
 namespace DungeonCrawler.Characters.NonPlayable

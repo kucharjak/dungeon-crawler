@@ -1,8 +1,7 @@
 ﻿using DungeonCrawler.Characters.NonPlayable;
-using DungeonCrawler.Extensions;
 using Godot;
 
-namespace DungeonCrawler.States.EnemyStates
+namespace DungeonCrawler.Components.States.Character.Enemy
 {
     public class KnockbackState : State<EnemyCharacter>
     {

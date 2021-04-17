@@ -1,9 +1,9 @@
 ﻿using DungeonCrawler.Characters.NonPlayable;
-using DungeonCrawler.Components;
+using DungeonCrawler.Components.Behaviour;
 using DungeonCrawler.Extensions;
 using Godot;
 
-namespace DungeonCrawler.States.EnemyStates
+namespace DungeonCrawler.Components.States.Character.Enemy
 {
     public class WanderState : State<EnemyCharacter>
     {

@@ -1,6 +1,6 @@
 ﻿using DungeonCrawler.Characters.NonPlayable;
 
-namespace DungeonCrawler.States.EnemyStates
+namespace DungeonCrawler.Components.States.Character.Enemy
 {
     public class IdleState : State<EnemyCharacter>
     {

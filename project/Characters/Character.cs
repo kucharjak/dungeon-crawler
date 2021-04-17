@@ -4,10 +4,8 @@ using System.Runtime.InteropServices.ComTypes;
 using DungeonCrawler.AutoLoad;
 using DungeonCrawler.Combat;
 using DungeonCrawler.Components;
+using DungeonCrawler.Components.States;
 using DungeonCrawler.Extensions;
-using DungeonCrawler.States;
-using DungeonCrawler.States.CommonStates;
-using DungeonCrawler.States.EnemyStates;
 using Godot;
 
 namespace DungeonCrawler.Characters

@@ -1,11 +1,10 @@
 using DungeonCrawler.AutoLoad;
-using DungeonCrawler.Characters;
 using DungeonCrawler.Characters.NonPlayable;
+using DungeonCrawler.Components.States.Character.Enemy;
 using DungeonCrawler.Extensions;
-using DungeonCrawler.States.EnemyStates;
 using Godot;
 
-namespace DungeonCrawler.Components
+namespace DungeonCrawler.Components.Behaviour
 {
     public class WanderComponent : Timer
     {
