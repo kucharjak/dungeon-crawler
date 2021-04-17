@@ -1,4 +1,4 @@
-﻿using DungeonCrawler.AutoLoad;
+using DungeonCrawler.AutoLoad;
 
 namespace DungeonCrawler.Components.States
 {

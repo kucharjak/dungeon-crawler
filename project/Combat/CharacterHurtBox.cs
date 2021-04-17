@@ -1,4 +1,4 @@
-﻿using DungeonCrawler.Characters;
+using DungeonCrawler.Characters;
 using DungeonCrawler.Extensions;
 using Godot;
 

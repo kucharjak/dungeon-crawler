@@ -1,4 +1,4 @@
-﻿// namespace DungeonCrawler.Controls
+// namespace DungeonCrawler.Controls
 // {
 //     public static class InputType
 //     {

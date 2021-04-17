@@ -1,4 +1,4 @@
-﻿namespace DungeonCrawler.Logging
+namespace DungeonCrawler.Logging
 {
     public enum LogLevel
     {

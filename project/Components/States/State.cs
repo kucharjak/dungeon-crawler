@@ -1,4 +1,4 @@
-﻿using DungeonCrawler.AutoLoad;
+using DungeonCrawler.AutoLoad;
 using Godot;
 
 namespace DungeonCrawler.Components.States

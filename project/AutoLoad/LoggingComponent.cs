@@ -1,4 +1,4 @@
-﻿using DungeonCrawler.Logging;
+using DungeonCrawler.Logging;
 using Godot;
 
 namespace DungeonCrawler.AutoLoad

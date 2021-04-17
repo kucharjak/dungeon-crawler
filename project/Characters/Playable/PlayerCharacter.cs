@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DungeonCrawler.AutoLoad;
 using DungeonCrawler.Characters.Playable.HeroKnight;
 using DungeonCrawler.Combat;

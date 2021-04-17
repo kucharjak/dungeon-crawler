@@ -1,4 +1,4 @@
-﻿using DungeonCrawler.Characters.NonPlayable;
+using DungeonCrawler.Characters.NonPlayable;
 using Godot;
 
 namespace DungeonCrawler.Components.States.Character.Enemy

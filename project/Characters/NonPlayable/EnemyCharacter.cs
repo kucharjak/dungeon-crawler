@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using DungeonCrawler.Combat;
 using DungeonCrawler.Components;
 using DungeonCrawler.Components.States.Character;

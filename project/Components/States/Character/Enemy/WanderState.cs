@@ -1,4 +1,4 @@
-﻿using DungeonCrawler.Characters.NonPlayable;
+using DungeonCrawler.Characters.NonPlayable;
 using DungeonCrawler.Components.Behaviour;
 using DungeonCrawler.Extensions;
 using Godot;

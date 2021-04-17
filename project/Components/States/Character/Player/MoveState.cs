@@ -1,4 +1,4 @@
-﻿using DungeonCrawler.Characters.Playable;
+using DungeonCrawler.Characters.Playable;
 using Godot;
 
 namespace DungeonCrawler.Components.States.Character.Player

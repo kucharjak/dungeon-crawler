@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Runtime.InteropServices.ComTypes;
 using DungeonCrawler.AutoLoad;

@@ -1,4 +1,4 @@
-﻿namespace DungeonCrawler.Components.States.Character
+namespace DungeonCrawler.Components.States.Character
 {
     public class DeathState : State<Characters.Character>
     {
