@@ -10,7 +10,7 @@ using Godot;
 
 namespace DungeonCrawler.Characters
 {
-    public abstract class Character : KinematicBody2D, IStateComponent<IState>, ICombatable<Character>
+    public abstract class Character : KinematicBody2D, IStateComponent<IState>, IDestructible
     {
         // Exported variables
         [Export] public int MaxSpeed = 120;
@@ -46,7 +46,7 @@ namespace DungeonCrawler.Characters
             
             Stats = this.GetChildNode<Stats>();
             CharacterHitBox = this.GetChildNode<CharacterHitBox>();
-            CharacterHitBox.CollisionShape2D.Disabled = true;
+            CharacterHitBox.Disable();
             
             CharacterHurtBox = this.GetChildNode<CharacterHurtBox>();
             BlinkAnimationPlayer = this.GetChildNodeOrNull<AnimationPlayer>(nameof(BlinkAnimationPlayer));
@@ -106,25 +106,6 @@ namespace DungeonCrawler.Characters
         public int GetHpValue() => Stats.Hp;
 
         public int GetMaxHpValue() => Stats.MaxHp;
-
-        public int GetDamageAmount(AttackType attackType)
-        {
-            switch (attackType)
-            {
-                case AttackType.Basic: 
-                    return Stats.AttackDamage;
-                case AttackType.Special: 
-                    return Stats.SpecialSkillDamage;
-            }
-            
-            LoggingComponent.Logger.Error($"{GetType().Name} - Attack type of {attackType} is not implemented");
-            return 0;
-        }
-
-        public Character GetAttacker()
-        {
-            return this;
-        }
 
         public abstract void ReceiveDamage(int damageAmount, Vector2 knockbackPower);
 

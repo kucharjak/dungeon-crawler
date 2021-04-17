@@ -2,12 +2,6 @@
 
 namespace DungeonCrawler.Combat
 {
-    public enum AttackType
-    {
-        Basic,
-        Special
-    }
-    
     public interface ICombatable<TCombatant> : IAttackable<TCombatant>, IDestructible
         where TCombatant : Node
     {
@@ -16,7 +10,7 @@ namespace DungeonCrawler.Combat
     public interface IAttackable<TAttacker>
         where TAttacker : Node
     {
-        int GetDamageAmount(AttackType attackType);
+        int GetDamageAmount();
 
         TAttacker GetAttacker();
     }
