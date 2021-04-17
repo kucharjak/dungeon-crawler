@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Characters/Playable/Amazonian/Amazonian.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Playable/Amazonian/Amazonian.cs" type="Script" id=2]
@@ -7,8 +7,6 @@
 [ext_resource path="res://Combat/CharacterHitbox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Combat/CharacterHurtBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Combat/HpIndicator.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Combat/InvincibilityTimer.tscn" type="PackedScene" id=8]
-
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack"
@@ -121,7 +119,7 @@ position = Vector2( 0, -20 )
 texture = ExtResource( 1 )
 vframes = 9
 hframes = 8
-frame = 1
+frame = 32
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
@@ -138,6 +136,7 @@ shape = SubResource( 4 )
 [node name="CollisionShape2D" parent="CharacterHitbox" index="0"]
 position = Vector2( 10, -16 )
 shape = SubResource( 5 )
+disabled = true
 
 [node name="CharacterHurtBox" parent="." instance=ExtResource( 6 )]
 
@@ -147,8 +146,6 @@ shape = SubResource( 6 )
 
 [node name="HpIndicator" parent="." instance=ExtResource( 7 )]
 position = Vector2( -24, -43 )
-
-[node name="InvincibilityTimer" parent="." instance=ExtResource( 8 )]
 
 [editable path="CharacterHitbox"]
 

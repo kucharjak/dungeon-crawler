@@ -10,7 +10,6 @@
 [ext_resource path="res://Combat/InvincibilityComponent.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Effects/Shaders/WhiteOverlay.shader" type="Shader" id=9]
 
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 9 )
@@ -110,30 +109,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("CharacterSprite:material:shader_param/active")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("HpIndicator:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=5]
 length = 0.6
@@ -198,7 +173,6 @@ texture = ExtResource( 1 )
 offset = Vector2( 0, -22 )
 vframes = 9
 hframes = 10
-frame = 18
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"

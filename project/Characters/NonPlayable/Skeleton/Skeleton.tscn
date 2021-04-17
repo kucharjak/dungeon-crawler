@@ -13,15 +13,10 @@
 [ext_resource path="res://Effects/Shaders/WhiteOverlay.shader" type="Shader" id=11]
 [ext_resource path="res://Combat/InvincibilityComponent.tscn" type="PackedScene" id=12]
 
-
-
-
-
-
 [sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 11 )
-shader_param/active = true
+shader_param/active = false
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 2.61357
@@ -137,30 +132,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 1, 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("CharacterSprite:material:shader_param/active")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("HpIndicator:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -305,7 +276,6 @@ wait_time = 5.0
 autostart = false
 
 [node name="HpIndicator" parent="." instance=ExtResource( 10 )]
-visible = false
 
 [editable path="DetectionZone"]
 

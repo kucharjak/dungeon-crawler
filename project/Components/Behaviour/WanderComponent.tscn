@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Components/Behaviour/WanderComponent.cs" type="Script" id=1]
 
-
 [node name="WanderComponent" type="Timer"]
 wait_time = 30.0
 one_shot = true

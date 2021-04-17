@@ -38,6 +38,7 @@ namespace DungeonCrawler.Characters
         public override void _Ready()
         {
             CharacterSprite = this.GetChildNode<Sprite>(nameof(CharacterSprite));
+            
             AnimationPlayer = this.GetChildNode<AnimationPlayer>();
             CollisionShape2D = this.GetChildNode<CollisionShape2D>(nameof(CollisionShape2D));
             
@@ -53,6 +54,7 @@ namespace DungeonCrawler.Characters
             CharacterHurtBox.Connect(nameof(CharacterHurtBox.DamageReceived), this, nameof(ReceiveDamage));
             
             HpIndicator = this.GetChildNode<HpIndicator>();
+            HpIndicator.Visible = true;
             Stats.Connect(nameof(Stats.HpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeHp));
             Stats.Connect(nameof(Stats.MaxHpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeMaxHP));
             HpIndicator.UpdateHealthIndication();
