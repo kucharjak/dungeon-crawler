@@ -126,11 +126,11 @@ position = Vector2( 204, 88 )
 [node name="HeroKnight" parent="GameObjects" instance=ExtResource( 4 )]
 position = Vector2( 61.8737, 108.639 )
 
-[node name="Skeleton" parent="GameObjects" instance=ExtResource( 6 )]
-position = Vector2( 396.812, 245.306 )
+[node name="Skeleton1" parent="GameObjects" instance=ExtResource( 6 )]
+position = Vector2( 422.785, 267.887 )
 
 [node name="Skeleton2" parent="GameObjects" instance=ExtResource( 6 )]
 position = Vector2( 175.205, 268.31 )
 
 [node name="Skeleton3" parent="GameObjects" instance=ExtResource( 6 )]
-position = Vector2( 463.003, 93.7885 )
+position = Vector2( 452.499, 78.9264 )

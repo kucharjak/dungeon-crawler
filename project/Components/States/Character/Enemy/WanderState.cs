@@ -1,9 +1,9 @@
 ﻿using DungeonCrawler.Characters.NonPlayable;
-using DungeonCrawler.Components;
+using DungeonCrawler.Components.Behaviour;
 using DungeonCrawler.Extensions;
 using Godot;
 
-namespace DungeonCrawler.States.EnemyStates
+namespace DungeonCrawler.Components.States.Character.Enemy
 {
     public class WanderState : State<EnemyCharacter>
     {
@@ -16,16 +16,17 @@ namespace DungeonCrawler.States.EnemyStates
             _wanderComponent = wanderComponent;
         }
 
-        public override void Init()
-        {
-            Node.AnimationPlayer.Play("Walk");
-        }
-
         public override void Run(float delta)
         {
+            if (Node.GetTarget() != null)
+            {
+                Node.PushState(new FollowState(Node));
+                return;
+            }
+
             if (_wanderPosition.DistanceTo(Node.Position) < 5)
             {
-                Node.Velocity = Vector2.Zero;
+                Node.ApplyVelocity(Vector2.Zero);
                 Node.PopState();
                 return;
             }
@@ -33,23 +34,14 @@ namespace DungeonCrawler.States.EnemyStates
             var targetDirection = _wanderPosition - Node.Position;
             targetDirection = targetDirection.Normalized();
             
-            Node.Velocity = Node.Velocity.MoveToward(targetDirection * (Node.MaxSpeed * 0.5f), Node.Acceleration * delta);
+            var newVelocity = Node.Velocity.MoveToward(targetDirection * (Node.MaxSpeed * 0.5f), Node.Acceleration * delta);
 
-            if (Node.Velocity.x != 0)
-            {
-                var flip = Node.Velocity.x < 0;
-
-                Node.CharacterSprite.FlipH = flip;
-                Node.CharacterHitBox.Scale = new Vector2(flip ? -1 : 1, Node.CharacterHitBox.Scale.y);
-            }
-            
-            Node.MoveAndSlide(Node.Velocity);
+            Node.ApplyVelocity(newVelocity);
         }
 
         public override void End()
         {
-            _wanderComponent.Restart();
-            Node.AnimationPlayer.Play("Walk");
+            _wanderComponent.Restart(_wanderComponent.WanderTimeout);
         }
     }
 }

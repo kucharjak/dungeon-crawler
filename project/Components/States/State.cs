@@ -1,7 +1,7 @@
 ﻿using DungeonCrawler.AutoLoad;
 using Godot;
 
-namespace DungeonCrawler.States
+namespace DungeonCrawler.Components.States
 {
     public abstract class State<TNode> : IState
         where TNode : Node

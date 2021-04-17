@@ -1,4 +1,4 @@
-﻿namespace DungeonCrawler.Controls
+﻿namespace DungeonCrawler.Controls.Controllers
 {
     public class FirstController : Controller
     {

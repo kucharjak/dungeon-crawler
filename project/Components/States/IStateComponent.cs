@@ -1,4 +1,4 @@
-﻿namespace DungeonCrawler.States
+﻿namespace DungeonCrawler.Components.States
 {
     public interface IStateComponent<TState>
         where TState : IState

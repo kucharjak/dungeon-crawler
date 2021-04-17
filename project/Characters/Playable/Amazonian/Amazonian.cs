@@ -1,4 +1,5 @@
 using DungeonCrawler.Controls;
+using DungeonCrawler.Controls.Controllers;
 
 namespace DungeonCrawler.Characters.Playable.Amazonian
 {

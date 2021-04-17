@@ -21,6 +21,8 @@ namespace DungeonCrawler.Combat
         {
             Character = this.GetParentNodeRecurse<Character>();
             CollisionShape2D = this.GetChildNode<CollisionShape2D>();
+
+            Connect("area_entered", this, nameof(OnAreaEntered));
         }
 
         public int GetDamageAmount(AttackType attackType)
@@ -43,6 +45,16 @@ namespace DungeonCrawler.Combat
 
                 destructible.ReceiveDamage(damage, knockbackPower);
             }
+        }
+        
+        public void Disable()
+        {
+            CollisionShape2D.SetDeferred("disabled", true);
+        }
+
+        public void Enable()
+        {
+            CollisionShape2D.SetDeferred("disabled", false);
         }
     }
 }

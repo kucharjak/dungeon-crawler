@@ -6,21 +6,30 @@ namespace DungeonCrawler.Combat
 {
     public class CharacterHurtBox : Area2D, IDestructible
     {
-        protected Character Character;
+        // Public properties
+        [Signal] public delegate void DamageReceived(int damageAmount, Vector2 knockbackPower);
 
-        // Children nodes
-        internal CollisionShape2D CollisionShape2D; 
+        // Protected components
+        protected CollisionShape2D CollisionShape2D;
         
         public override void _Ready()
         {
-            Character = this.GetParentNodeRecurse<Character>();
-            
             CollisionShape2D = this.GetChildNode<CollisionShape2D>();
         }
-
+        
         public void ReceiveDamage(int damageAmount, Vector2 knockbackPower)
         {
-            Character.ReceiveDamage(damageAmount, knockbackPower);
+            EmitSignal(nameof(DamageReceived), damageAmount, knockbackPower);
+        }
+
+        public void Disable()
+        {
+            CollisionShape2D.SetDeferred("disabled", true);
+        }
+
+        public void Enable()
+        {
+            CollisionShape2D.SetDeferred("disabled", false);
         }
     }
 }

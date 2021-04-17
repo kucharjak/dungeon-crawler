@@ -1,27 +1,28 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Characters/NonPlayable/Skeleton/Skeleton.png" type="Texture" id=1]
 [ext_resource path="res://Characters/NonPlayable/Skeleton/Skeleton.cs" type="Script" id=2]
 [ext_resource path="res://Combat/DetectionZone.tscn" type="PackedScene" id=3]
-[ext_resource path="res://States/StateComponent.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Components/WanderComponent.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Components/States/StateComponent.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Components/Behaviour/WanderComponent.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Combat/Stats.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Combat/CharacterHurtBox.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Combat/CharacterHitbox.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Components/SoftCollision.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Components/Traits/SoftCollision.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Combat/HpIndicator.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Effects/Shaders/WhiteOverlay.shader" type="Shader" id=11]
+[ext_resource path="res://Combat/InvincibilityComponent.tscn" type="PackedScene" id=12]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 resource_local_to_scene = true
 shader = ExtResource( 11 )
 shader_param/active = false
 
-[sub_resource type="CapsuleShape2D" id=3]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 2.61357
 height = 12.1559
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Attack"
 length = 0.5
 tracks/0/type = "value"
@@ -73,7 +74,7 @@ tracks/3/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "Death"
 length = 0.5
 tracks/0/type = "value"
@@ -101,7 +102,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "Hit"
 length = 0.1
 tracks/0/type = "value"
@@ -117,7 +118,7 @@ tracks/0/keys = {
 "values": [ 25 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -132,32 +133,8 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 1, 0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("CharacterSprite:material:shader_param/active")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("HpIndicator:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -173,7 +150,7 @@ tracks/0/keys = {
 "values": [ 12, 13, 14, 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -189,7 +166,7 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -205,18 +182,18 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="CircleShape2D" id=15]
+[sub_resource type="CircleShape2D" id=10]
 radius = 100.0
 
-[sub_resource type="CapsuleShape2D" id=12]
+[sub_resource type="CapsuleShape2D" id=11]
 radius = 7.67647
 height = 12.4789
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="RectangleShape2D" id=12]
 resource_local_to_scene = true
 extents = Vector2( 5, 12 )
 
-[sub_resource type="CircleShape2D" id=14]
+[sub_resource type="CircleShape2D" id=13]
 
 [node name="Skeleton" type="KinematicBody2D"]
 position = Vector2( 0.148651, 0.148651 )
@@ -227,8 +204,11 @@ __meta__ = {
 }
 MaxSpeed = 80
 
+[node name="InvincibilityComponent" parent="." instance=ExtResource( 12 )]
+InvincibilityTimeout = 0.2
+
 [node name="CharacterSprite" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 1 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
 vframes = 6
@@ -240,7 +220,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -251,21 +231,21 @@ Hp = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "Idle"
-anims/Attack = SubResource( 4 )
-anims/Death = SubResource( 5 )
-anims/Hit = SubResource( 6 )
-anims/Idle = SubResource( 7 )
-anims/Run = SubResource( 8 )
-anims/Walk = SubResource( 9 )
+anims/Attack = SubResource( 3 )
+anims/Death = SubResource( 4 )
+anims/Hit = SubResource( 5 )
+anims/Idle = SubResource( 6 )
+anims/Run = SubResource( 7 )
+anims/Walk = SubResource( 8 )
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Blink = SubResource( 10 )
+anims/Blink = SubResource( 9 )
 
 [node name="DetectionZone" parent="." instance=ExtResource( 3 )]
 visible = true
 
 [node name="CollisionShape2D" parent="DetectionZone" index="0"]
-shape = SubResource( 15 )
+shape = SubResource( 10 )
 
 [node name="CharacterHurtBox" parent="." instance=ExtResource( 7 )]
 visible = false
@@ -273,7 +253,7 @@ collision_layer = 8
 
 [node name="CollisionShape2D" parent="CharacterHurtBox" index="0"]
 position = Vector2( 0, -14 )
-shape = SubResource( 12 )
+shape = SubResource( 11 )
 
 [node name="CharacterHitbox" parent="." instance=ExtResource( 8 )]
 collision_layer = 2147483648
@@ -281,21 +261,21 @@ collision_mask = 4
 
 [node name="CollisionShape2D" parent="CharacterHitbox" index="0"]
 position = Vector2( 5, -12 )
-shape = SubResource( 13 )
+shape = SubResource( 12 )
 disabled = true
 
 [node name="SoftCollision" parent="." instance=ExtResource( 9 )]
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
-shape = SubResource( 14 )
+shape = SubResource( 13 )
 
 [node name="StateComponent" parent="." instance=ExtResource( 4 )]
 
 [node name="WanderComponent" parent="." instance=ExtResource( 5 )]
 wait_time = 5.0
+autostart = false
 
 [node name="HpIndicator" parent="." instance=ExtResource( 10 )]
-visible = false
 
 [editable path="DetectionZone"]
 

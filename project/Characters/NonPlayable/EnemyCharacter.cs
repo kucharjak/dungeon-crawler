@@ -1,44 +1,32 @@
 ﻿using System;
 using DungeonCrawler.Combat;
+using DungeonCrawler.Components;
+using DungeonCrawler.Components.States.Character;
+using DungeonCrawler.Components.States.Character.Enemy;
+using DungeonCrawler.Components.Traits;
 using DungeonCrawler.Extensions;
-using DungeonCrawler.States;
-using DungeonCrawler.States.CommonStates;
-using DungeonCrawler.States.EnemyStates;
 using Godot;
 
 namespace DungeonCrawler.Characters.NonPlayable
 {
     public class EnemyCharacter : Character
     {
-        private bool _isAggressive = true;
-        
         // Editable variables
-        [Export]
-        public bool IsAggressive
-        {
-            get { return _isAggressive; }
-            set
-            {
-                if (value == false) Target = null;
-                _isAggressive = value;
-            }
-        }
+        [Export] public bool IsAggressive = true;
 
-        // Enemy properties
-        internal Vector2 StartPosition = Vector2.Zero;
+        // Public properties
+        public Vector2 StartPosition = Vector2.Zero;
 
-        internal DetectionZone DetectionZone;
-
-        // Other components
-        public Node2D Target; 
+        // Protected components
+        protected SoftCollision SoftCollision;
+        protected DetectionZone DetectionZone;
+        protected Node2D Target;
 
         public override void _Ready()
         {
             base._Ready();
             
-            HpIndicator = this.GetChildNode<HpIndicator>();
-            Stats.Connect(nameof(Stats.HpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeHp));
-            Stats.Connect(nameof(Stats.MaxHpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeMaxHP));
+            SoftCollision = this.GetChildNodeOrNull<SoftCollision>();
 
             DetectionZone = this.GetChildNode<DetectionZone>();
             DetectionZone.Connect(nameof(DetectionZone.TargetSpotted), this, nameof(OnTargetSpotted));
@@ -63,6 +51,33 @@ namespace DungeonCrawler.Characters.NonPlayable
             
             PushState(new KnockbackState(this, knockbackPower));
         }
+
+        public override void Die()
+        {
+            CharacterHurtBox.Disable();
+            CharacterHitBox.Disable();
+            
+            CollisionShape2D.SetDeferred("disabled", true);
+            SoftCollision.CollisionShape2D.SetDeferred("disabled", true);
+
+            AnimationPlayer.Play("Death");
+        }
+
+        public override void StartInvincibility()
+        {
+            CharacterHurtBox.Disable();
+            BlinkAnimationPlayer.Play("Blink");
+            AnimationPlayer.Play("Hit");
+        }
+
+        public override void EndInvincibility()
+        {
+            CharacterHurtBox.Enable();
+            BlinkAnimationPlayer.ToEnd();
+            BlinkAnimationPlayer.Stop();
+        }
+
+        public Node2D GetTarget() => Target;
 
         public void OnTargetSpotted(Node2D target)
         {

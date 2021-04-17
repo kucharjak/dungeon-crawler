@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Components/WanderComponent.cs" type="Script" id=1]
+[ext_resource path="res://Components/Behaviour/WanderComponent.cs" type="Script" id=1]
 
 [node name="WanderComponent" type="Timer"]
 wait_time = 30.0
@@ -8,4 +8,3 @@ one_shot = true
 autostart = true
 script = ExtResource( 1 )
 WanderDistance = 50
-[connection signal="timeout" from="." to="." method="OnTimeout"]

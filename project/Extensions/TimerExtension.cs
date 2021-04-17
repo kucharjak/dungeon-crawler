@@ -16,5 +16,18 @@ namespace DungeonCrawler.Extensions
             
             timer.Start();
         }
+        
+        /// <summary>
+        /// Restarts timer with given timeout
+        /// </summary>
+        public static void Restart(this Timer timer, float millis)
+        {
+            if (!timer.IsStopped())
+            {
+                timer.Stop();   
+            }
+            
+            timer.Start(millis);
+        }
     }
 }
