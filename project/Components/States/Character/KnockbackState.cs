@@ -1,20 +1,14 @@
-using DungeonCrawler.Characters.NonPlayable;
 using Godot;
 
-namespace DungeonCrawler.Components.States.Character.Enemy
+namespace DungeonCrawler.Components.States.Character
 {
-    public class KnockbackState : State<EnemyCharacter>
+    public class KnockbackState : State<Characters.Character>
     {
         private Vector2 _knockbackPower;
 
-        public KnockbackState(EnemyCharacter node, Vector2 knockbackPower) : base(node)
+        public KnockbackState(Characters.Character node, Vector2 knockbackPower) : base(node)
         {
             _knockbackPower = knockbackPower;
-        }
-
-        public override void Init()
-        {
-            Node.StartInvincibility();
         }
 
         public override void Run(float delta)
@@ -27,11 +21,6 @@ namespace DungeonCrawler.Components.States.Character.Enemy
             
             _knockbackPower = _knockbackPower.MoveToward(Vector2.Zero, Node.Friction * delta);
             Node.MoveAndSlide(_knockbackPower);
-        }
-
-        public override void End()
-        {
-            Node.EndInvincibility();   
         }
     }
 }

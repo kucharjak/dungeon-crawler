@@ -19,17 +19,12 @@ namespace DungeonCrawler.Characters.Playable
 
         // Protected components
         protected IController Controller = new NoController();
-        protected InvincibilityComponent InvincibilityComponent;
 
         public override void _Ready()
         {
             base._Ready();
             
             PushState(new MoveState(this));
-            
-            InvincibilityComponent = this.GetChildNode<InvincibilityComponent>();
-            InvincibilityComponent.Connect(nameof(InvincibilityComponent.InvincibilityStarted), this, nameof(StartInvincibility));
-            InvincibilityComponent.Connect(nameof(InvincibilityComponent.InvincibilityEnded), this, nameof(EndInvincibility));
         }
 
         public override void ReceiveDamage(int damageAmount, Vector2 knockbackPower)
@@ -38,7 +33,10 @@ namespace DungeonCrawler.Characters.Playable
 
             if (Stats.Hp > 0)
             {
+                AnimationPlayer.Play("Hit");
                 InvincibilityComponent.StartInvincibility();
+                PushState(new KnockbackState(this, knockbackPower));
+                
                 return;
             }
                 
@@ -88,6 +86,49 @@ namespace DungeonCrawler.Characters.Playable
 
             Controller = new NoController();
             return true;
+        }
+        
+        public override Vector2 ApplyVelocity(Vector2 velocity)
+        {
+            Velocity = velocity;
+            
+            var realVelocity = MoveAndSlide(Velocity);
+
+            if (IsRolling())
+            {
+                AnimationPlayer.Play("Roll");
+            } 
+            else if (realVelocity != Vector2.Zero) 
+            {
+                AnimationPlayer.Play("Run");
+            }
+            else
+            {
+                AnimationPlayer.Play("Idle");
+            }
+            
+            if (Velocity.x != 0)
+            {
+                var flip = velocity.x < 0;
+            
+                CharacterSprite.FlipH = flip;
+                CharacterHitBox.Scale = new Vector2(flip ? -1 : 1, CharacterHitBox.Scale.y);
+            }
+
+            return realVelocity;
+        }
+
+        public bool IsRolling() => AnimationPlayer.CurrentAnimation == "Roll" && AnimationPlayer.IsPlaying();
+
+        public void StartRoll()
+        {
+            AnimationPlayer.Play("Roll");
+            CharacterHurtBox.Disable();
+        }
+
+        public void EndRoll()
+        {
+            CharacterHurtBox.Enable();
         }
     }
 }

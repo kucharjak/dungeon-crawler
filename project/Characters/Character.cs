@@ -34,6 +34,8 @@ namespace DungeonCrawler.Characters
         protected AnimationPlayer BlinkAnimationPlayer;
         
         protected HpIndicator HpIndicator;
+
+        protected InvincibilityComponent InvincibilityComponent;
         
         public override void _Ready()
         {
@@ -58,6 +60,10 @@ namespace DungeonCrawler.Characters
             Stats.Connect(nameof(Stats.HpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeHp));
             Stats.Connect(nameof(Stats.MaxHpWasChanged), HpIndicator, nameof(HpIndicator.OnChangeMaxHP));
             HpIndicator.UpdateHealthIndication();
+            
+            InvincibilityComponent = this.GetChildNode<InvincibilityComponent>();
+            InvincibilityComponent.Connect(nameof(InvincibilityComponent.InvincibilityStarted), this, nameof(StartInvincibility));
+            InvincibilityComponent.Connect(nameof(InvincibilityComponent.InvincibilityEnded), this, nameof(EndInvincibility));
         }
 
         public virtual Vector2 ApplyVelocity(Vector2 velocity)

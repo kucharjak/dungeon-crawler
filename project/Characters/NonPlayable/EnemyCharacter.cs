@@ -31,7 +31,7 @@ namespace DungeonCrawler.Characters.NonPlayable
             DetectionZone = this.GetChildNode<DetectionZone>();
             DetectionZone.Connect(nameof(DetectionZone.TargetSpotted), this, nameof(OnTargetSpotted));
             // DetectionZone.Connect(nameof(DetectionZone.TargetLost), this, nameof(OnTargetLost));
-            
+
             PushState(new IdleState(this));
 
             StartPosition = Position;
@@ -49,6 +49,7 @@ namespace DungeonCrawler.Characters.NonPlayable
                 return;
             }
             
+            InvincibilityComponent.StartInvincibility();
             PushState(new KnockbackState(this, knockbackPower));
         }
 

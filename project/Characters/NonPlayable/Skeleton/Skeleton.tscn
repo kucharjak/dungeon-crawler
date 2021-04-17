@@ -204,15 +204,13 @@ __meta__ = {
 }
 MaxSpeed = 80
 
-[node name="InvincibilityComponent" parent="." instance=ExtResource( 12 )]
-InvincibilityTimeout = 0.2
-
 [node name="CharacterSprite" type="Sprite" parent="."]
 material = SubResource( 1 )
 position = Vector2( 0, -16 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 6
+frame = 11
 __meta__ = {
 "_edit_group_": true
 }
@@ -276,6 +274,9 @@ wait_time = 5.0
 autostart = false
 
 [node name="HpIndicator" parent="." instance=ExtResource( 10 )]
+
+[node name="InvincibilityComponent" parent="." instance=ExtResource( 12 )]
+InvincibilityTimeout = 0.2
 
 [editable path="DetectionZone"]
 

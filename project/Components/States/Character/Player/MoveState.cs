@@ -21,6 +21,14 @@ namespace DungeonCrawler.Components.States.Character.Player
             }
             
             var inputVector = controller.GetInputVector();
+
+            if (inputVector != Vector2.Zero && controller.IsRollPressed())
+            {
+                Node.PushState(new RollState(Node, inputVector));
+
+                return;
+            }
+            
             Vector2 newVelocity;
             
             if (inputVector != Vector2.Zero)
@@ -31,7 +39,7 @@ namespace DungeonCrawler.Components.States.Character.Player
             {
                 newVelocity = Node.Velocity.MoveToward(Vector2.Zero, Node.Friction * delta);
             }
-
+            
             Node.ApplyVelocity(newVelocity);
         }
     }
